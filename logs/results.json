@@ -1,0 +1,154 @@
+{
+	"players": [
+		{
+			"id": "a07197c5-2c0a-4ad3-8f4d-34740c3de0e6",
+			"object_type": 3,
+			"state": "idle",
+			"functional": true,
+			"error": null,
+			"team_name": "Unpaid Intern",
+			"file_name": null,
+			"actions": [
+				5,
+				10
+			],
+			"avatar": {
+				"id": "673fb825-17da-4f75-94b0-0e6efd81f346",
+				"object_type": 4,
+				"state": "idle",
+				"company": 1,
+				"score": 260,
+				"science_points": 50,
+				"position": {
+					"id": "6c10a678-2af7-4aa0-8405-bea910895402",
+					"object_type": 6,
+					"state": "idle",
+					"x": 2,
+					"y": 6
+				},
+				"movement_speed": 1,
+				"drop_rate": 1,
+				"tech_tree": {
+					"Mining Robotics": true,
+					"Improved Drivetrain": false,
+					"Superior Drivetrain": false,
+					"Overdrive Drivetrain": false,
+					"Improved Mining": false,
+					"Superior Mining": false,
+					"Overdrive Mining": false,
+					"Dynamite": false,
+					"Landmines": false,
+					"EMPs": false,
+					"Trap Defusal": false
+				},
+				"dynamite_active_ability": {
+					"id": "d93ff54c-8121-428d-9fcf-8ae18ef5de39",
+					"object_type": 28,
+					"state": "idle",
+					"cooldown": 3,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"landmine_active_ability": {
+					"id": "cdad66e7-9bab-4680-a9c8-214e97c8ee00",
+					"object_type": 26,
+					"state": "idle",
+					"cooldown": 4,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"emp_active_ability": {
+					"id": "799144b9-61a7-447a-abc4-3700b53fd1d6",
+					"object_type": 27,
+					"state": "idle",
+					"cooldown": 4,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"defusal_active_ability": {
+					"id": "ed92cb34-10cd-48a4-8ef5-058c1475736e",
+					"object_type": 34,
+					"state": "idle",
+					"cooldown": 2,
+					"fuse": 0,
+					"is_usable": true
+				}
+			}
+		},
+		{
+			"id": "34cd0713-270e-4278-87fa-c8872cf08126",
+			"object_type": 3,
+			"state": "idle",
+			"functional": true,
+			"error": null,
+			"team_name": "BitBots",
+			"file_name": null,
+			"actions": [
+				4,
+				10
+			],
+			"avatar": {
+				"id": "6ca3e8d6-d714-4f4d-9599-3ce0c36c802b",
+				"object_type": 4,
+				"state": "moving",
+				"company": 2,
+				"score": 220,
+				"science_points": 20,
+				"position": {
+					"id": "19afcaca-6868-4983-8259-13696ad035fd",
+					"object_type": 6,
+					"state": "idle",
+					"x": 9,
+					"y": 12
+				},
+				"movement_speed": 1,
+				"drop_rate": 1,
+				"tech_tree": {
+					"Mining Robotics": true,
+					"Improved Drivetrain": false,
+					"Superior Drivetrain": false,
+					"Overdrive Drivetrain": false,
+					"Improved Mining": false,
+					"Superior Mining": false,
+					"Overdrive Mining": false,
+					"Dynamite": false,
+					"Landmines": false,
+					"EMPs": false,
+					"Trap Defusal": false
+				},
+				"dynamite_active_ability": {
+					"id": "f04068cf-9b5c-403b-ba04-8bc232e32d58",
+					"object_type": 28,
+					"state": "idle",
+					"cooldown": 3,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"landmine_active_ability": {
+					"id": "39e9286e-e007-48be-a127-d41c08e47f6d",
+					"object_type": 26,
+					"state": "idle",
+					"cooldown": 4,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"emp_active_ability": {
+					"id": "415d2950-e062-41e6-bacc-aa9b82eecbbf",
+					"object_type": 27,
+					"state": "idle",
+					"cooldown": 4,
+					"fuse": 0,
+					"is_usable": true
+				},
+				"defusal_active_ability": {
+					"id": "fed3b50c-5539-4eb7-b3bd-a92d17f67531",
+					"object_type": 34,
+					"state": "idle",
+					"cooldown": 2,
+					"fuse": 0,
+					"is_usable": true
+				}
+			}
+		}
+	]
+}
