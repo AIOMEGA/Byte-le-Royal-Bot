@@ -65,7 +65,7 @@ class Client(UserClient):
             actions = move_actions  # Combine move actions with existing actions
             
         # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 5:
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
             self.current_state = State.SELLING
 
         # Make action decision for this turn
@@ -103,8 +103,8 @@ class Client(UserClient):
 
     def generate_moves(self, start_position, end_position, vertical_first, world):
         """
-        This function will generate a path between the start and end position. It does not consider walls and will
-        try to walk directly to the end position.
+        This function will generate a path between the start and end position.
+        It does not consider walls and will try to walk directly to the end position.
         :param start_position:      Position to start at
         :param end_position:        Position to get to
         :param vertical_first:      True if the path should be vertical first, False if the path should be horizontal first
@@ -112,15 +112,18 @@ class Client(UserClient):
         """
         dx = end_position.x - start_position.x
         dy = end_position.y - start_position.y
-        
-        horizontal = [ActionType.MOVE_LEFT] * -dx if dx < 0 else [ActionType.MOVE_RIGHT] * dx
-        vertical = [ActionType.MOVE_UP] * -dy if dy < 0 else [ActionType.MOVE_DOWN] * dy
 
-        # Check for obstacles (walls) and visited positions
-        valid_horizontal = [action for action in horizontal if self.is_valid_move(start_position, action, world)]
-        valid_vertical = [action for action in vertical if self.is_valid_move(start_position, action, world)]
+        # Generate a list of actions based on the difference in coordinates
+        horizontal_actions = [ActionType.MOVE_LEFT] * min(dx, 0) + [ActionType.MOVE_RIGHT] * max(dx, 0)
+        vertical_actions = [ActionType.MOVE_UP] * min(dy, 0) + [ActionType.MOVE_DOWN] * max(dy, 0)
 
-        return valid_vertical + valid_horizontal if vertical_first else valid_horizontal + valid_vertical
+        # Combine vertical and horizontal actions based on the preference
+        actions = vertical_actions + horizontal_actions if vertical_first else horizontal_actions + vertical_actions
+
+        # Filter out invalid moves
+        valid_moves = [action for action in actions if self.is_valid_move(start_position, action, world)]
+
+        return valid_moves
     
     def generate_moves2(self, start_position, end_position, vertical_first):
         """
