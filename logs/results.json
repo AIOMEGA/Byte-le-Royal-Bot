@@ -1,7 +1,7 @@
 {
 	"players": [
 		{
-			"id": "5cdcb863-197c-4768-8577-5531e1e00c9c",
+			"id": "efac591d-58b0-480b-adca-043182d4ad9d",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -9,22 +9,22 @@
 			"team_name": "Unpaid Intern",
 			"file_name": null,
 			"actions": [
-				3,
+				4,
 				10
 			],
 			"avatar": {
-				"id": "4ed1a61a-e1cc-4558-9daa-c60548b91696",
+				"id": "9a87504f-ba3f-438e-a08c-315ba2200a07",
 				"object_type": 4,
-				"state": "moving",
+				"state": "idle",
 				"company": 1,
-				"score": 180,
-				"science_points": 30,
+				"score": 120,
+				"science_points": 20,
 				"position": {
-					"id": "35437a84-9951-4b8f-be05-30567a9a83c7",
+					"id": "1f805a06-eeba-4d36-967b-8dc46361954c",
 					"object_type": 6,
 					"state": "idle",
 					"x": 1,
-					"y": 6
+					"y": 1
 				},
 				"movement_speed": 1,
 				"drop_rate": 1,
@@ -42,7 +42,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "fe24832c-242b-4b33-b1b7-492d9bb7ada9",
+					"id": "795e1ec0-0fc8-414f-a661-91f9e5356fd4",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -50,7 +50,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "090a78fb-60b9-48c8-8c13-35cd308e5893",
+					"id": "5d761fe9-b97e-490a-b9bf-dc7aeaaf4486",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -58,7 +58,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "62b21a96-135f-4b42-83c3-2a30c006c1f4",
+					"id": "da5dd119-21e0-472f-9e4e-3254152aa0ec",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -66,7 +66,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "2812f72b-c838-4617-8971-062c4af0a6d1",
+					"id": "762535de-2e5a-45ec-af8c-92c8132addf5",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,
@@ -76,7 +76,7 @@
 			}
 		},
 		{
-			"id": "eea5cdfd-85f1-4abd-8570-ea24c9db0926",
+			"id": "92469da6-fd8c-47dc-9bc1-b582457a9eb8",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -84,22 +84,22 @@
 			"team_name": "BitBots",
 			"file_name": null,
 			"actions": [
-				3,
+				14,
 				10
 			],
 			"avatar": {
-				"id": "de233172-1b3b-443c-b2cf-f1109f7c3dfa",
+				"id": "8e59e7a2-e227-42e1-81f5-9c376d976d35",
 				"object_type": 4,
-				"state": "idle",
+				"state": "mining",
 				"company": 2,
-				"score": 304,
-				"science_points": 50,
+				"score": 240,
+				"science_points": 70,
 				"position": {
-					"id": "27ed86f8-8921-4ada-9c73-4525e512110a",
+					"id": "5d921e66-2487-4cdb-8105-58563ffa76d2",
 					"object_type": 6,
 					"state": "idle",
-					"x": 11,
-					"y": 12
+					"x": 12,
+					"y": 4
 				},
 				"movement_speed": 1,
 				"drop_rate": 1,
@@ -117,7 +117,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "5d07ee7f-d569-46ac-bd03-0bc895aa1b8d",
+					"id": "61a27bbe-00ae-4e5b-abf2-82746cb37089",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -125,7 +125,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "acf78c10-73a1-47c7-8313-ccda6934d678",
+					"id": "18d5fae7-18d0-4d8f-af71-385b23af0384",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -133,7 +133,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "bd8912c6-f07d-47b1-8401-cca9b10d36f9",
+					"id": "ca1ccc7f-eaf4-4a18-bbbc-cc14376788e7",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -141,7 +141,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "83950a15-795e-4a47-9cec-150390973fc9",
+					"id": "2bd7a223-2c7c-4941-b95f-572148d279c8",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,

@@ -8,3 +8,17 @@ The bot should also keep track of its inventory and how many turns it is away fr
 If the turnsAway + turnsLeft = 200 then it should return to base
 
 -------Upgrades---------
+
+
+# Takes the position between a given position and another given position and then calculates the distance between them
+    def distance_between_positions(self, pos1, pos2):
+        return ((pos1.x - pos2.x) ** 2 + (pos1.y - pos2.y) ** 2) ** 0.5
+
+    def find_nearest_ore(self, world, current_position): # Takes the world variable and bots current position
+        ores = world.get_objects(ObjectType.ORE_OCCUPIABLE_STATION) # Gets the ores on the map from the world
+        if not ores:
+            return None
+
+        # Determines the minimum distance between the player and the ore using the previous method
+        nearest_ore = min(ores, key=lambda ore: self.distance_between_positions(current_position, ore.position))
+        return nearest_ore.position # Returns nearest ore position
