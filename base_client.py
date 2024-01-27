@@ -30,9 +30,11 @@ class Client(UserClient):
         self.my_station_type = ObjectType.TURING_STATION if self.company == Company.TURING else ObjectType.CHURCH_STATION
         self.current_state = State.MINING
         self.base_position = world.get_objects(self.my_station_type)[0][0]
-
+    
     # This is where your AI will decide what to do
     def take_turn(self, turn, actions, world, avatar):
+        countATech =0
+          
         """
         This is where your AI will decide what to do.
         :param turn:        The current turn of the game.
@@ -47,14 +49,39 @@ class Client(UserClient):
         # If I start the turn on my station, I should...
         if current_tile.occupied_by.object_type == self.my_station_type:
             # buy Improved Mining tech if I can...
+            if avatar.science_points >= avatar.get_tech_info('Improved Mining').cost and not avatar.is_researched('Improved Mining'):
+                return [ActionType.BUY_IMPROVED_MINING]
+            #if avatar.science_points >= avatar.get_tech_info('Dynamite').cost and not avatar.is_researched('Dynamite'):
+                #return [ActionType.BUY_DYNAMITE]
             if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
+            if avatar.science_points >= avatar.get_tech_info('Superior Mining').cost and not avatar.is_researched('Superior Mining'):
+                return [ActionType.BUY_SUPERIOR_MINING]
+            #if avatar.science_points >= avatar.get_tech_info('Landmines').cost and not avatar.is_researched('Landmines'):
+                #return [ActionType.BUY_LANDMINES]
+            if avatar.science_points >= avatar.get_tech_info('Superior Drivetrain').cost and not avatar.is_researched('Superior Drivetrain'):
+                return [ActionType.BUY_SUPERIOR_DRIVETRAIN]
+            #if avatar.science_points >= avatar.get_tech_info('EMPs').cost and not avatar.is_researched('EMPs'):
+               # return [ActionType.BUY_EMPS] 
+            if avatar.science_points >= avatar.get_tech_info('Overdrive Mining').cost and not avatar.is_researched('Overdrive Mining'):
+                return [ActionType.BUY_OVERDRIVE_MINING]  
+            if avatar.science_points >= avatar.get_tech_info('Overdrive Drivetrain').cost and not avatar.is_researched('Overdrive Drivetrain'):
+                return [ActionType.BUY_OVERDRIVE_DRIVETRAIN]
+            
             # otherwise set my state to mining
             self.current_state = State.MINING
             
         # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 5:
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 45 or countATech >= 5:
             self.current_state = State.SELLING
+            countATech=0
+            
+        #if I have enough ATech i will go back to base  
+        #if  countATech >= 1:
+              # self.current_state = State.SELLING
+
+            
+          
             
         # Make action decision for this turn
         if self.current_state == State.SELLING:
@@ -63,7 +90,17 @@ class Client(UserClient):
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
                 # If I'm mining and I'm standing on an ore, mine it
+                ore = current_tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item
                 actions = [ActionType.MINE]
+                    #check if current ore is ancient tech
+                if  ore.object_type == ObjectType.ANCIENT_TECH:
+                    countATech = countATech +1
+                    if  countATech >= 5:
+                        
+                        self.current_state = State.SELLING
+                        countATech=0
+
+                    
             else:
                 # If I'm mining and I'm not standing on an ore, move randomly
                 actions = [random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
