@@ -1,0 +1,10 @@
+--------Strategy---------
+Bot starts by moving out of the starting location as far as it can.
+Then the bot scans surrounding tiles if possible
+The Bot should determine what team it is on and prioritize ore based on its team
+With its team in mind it should count up the scores of the surrounding ores
+Which ever ore patch within its vision is worth more it will become the bots target
+The bot should also keep track of its inventory and how many turns it is away from base
+If the turnsAway + turnsLeft = 200 then it should return to base
+
+-------Upgrades---------
