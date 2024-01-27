@@ -47,8 +47,24 @@ class Client(UserClient):
         # If I start the turn on my station, I should...
         if current_tile.occupied_by.object_type == self.my_station_type:
             # buy Improved Mining tech if I can...
+            if avatar.science_points >= avatar.get_tech_info('Improved Mining').cost and not avatar.is_researched('Improved Mining'):
+                return [ActionType.BUY_IMPROVED_MINING]
+            if avatar.science_points >= avatar.get_tech_info('Dynamite').cost and not avatar.is_researched('Dynamite'):
+                return [ActionType.BUY_DYNAMITE]
             if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
+            if avatar.science_points >= avatar.get_tech_info('Superior Mining').cost and not avatar.is_researched('Superior Mining'):
+                return [ActionType.BUY_SUPERIOR_MINING]
+            if avatar.science_points >= avatar.get_tech_info('Landmines').cost and not avatar.is_researched('Landmines'):
+                return [ActionType.BUY_LANDMINES]
+            if avatar.science_points >= avatar.get_tech_info('Superior Drivetrain').cost and not avatar.is_researched('Superior Drivetrain'):
+                return [ActionType.BUY_SUPERIOR_DRIVETRAIN]
+            if avatar.science_points >= avatar.get_tech_info('EMPs').cost and not avatar.is_researched('EMPs'):
+                return [ActionType.BUY_EMPS] 
+            if avatar.science_points >= avatar.get_tech_info('Overdrive Mining').cost and not avatar.is_researched('Overdrive Mining'):
+                return [ActionType.BUY_OVERDRIVE_MINING]  
+            if avatar.science_points >= avatar.get_tech_info('Overdrive Drivetrain').cost and not avatar.is_researched('Overdrive Drivetrain'):
+                return [ActionType.BUY_OVERDRIVE_DRIVETRAIN]
             # otherwise set my state to mining
             self.current_state = State.MINING
             
