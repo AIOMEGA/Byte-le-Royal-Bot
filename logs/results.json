@@ -1,7 +1,7 @@
 {
 	"players": [
 		{
-			"id": "99007f95-c892-4ec6-9715-cc8dcd9a9c01",
+			"id": "be09ca81-7634-4a36-8b3a-f2dc9a542033",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -9,22 +9,22 @@
 			"team_name": "Unpaid Intern",
 			"file_name": null,
 			"actions": [
-				4,
+				5,
 				10
 			],
 			"avatar": {
-				"id": "31e61282-b516-462b-b11c-5c2fa5a303f2",
+				"id": "17b6bfad-4f4a-49e0-b441-bce7ab46fb5a",
 				"object_type": 4,
 				"state": "moving",
 				"company": 1,
-				"score": 180,
+				"score": 160,
 				"science_points": 20,
 				"position": {
-					"id": "cae55c83-e0a4-4776-b8ff-e80d0343e3a1",
+					"id": "89e38eb7-736e-4436-983e-2f2162991189",
 					"object_type": 6,
 					"state": "idle",
-					"x": 1,
-					"y": 4
+					"x": 3,
+					"y": 1
 				},
 				"movement_speed": 1,
 				"drop_rate": 1,
@@ -42,7 +42,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "a8ab4353-96da-4b9f-8be2-5e18c80e7009",
+					"id": "225c6a0d-9c2f-47d4-b412-c8779c27d24a",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -50,7 +50,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "0e9d9fdb-2342-4395-b807-e2b309ad8705",
+					"id": "1144fc1a-d23f-4f80-abc6-0f4f111ce992",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -58,7 +58,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "8b2b85ef-899d-42e8-b572-bddeb34069cf",
+					"id": "b63f0153-651b-4320-b38a-8f4aab69d678",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -66,7 +66,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "f70f4786-d98b-4e50-87c7-b49120e847e5",
+					"id": "5f0dd1f2-c8df-473e-bc8c-710bcece58c4",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,
@@ -76,7 +76,7 @@
 			}
 		},
 		{
-			"id": "5074f1b6-7d0d-4096-a404-3b9d6888d5f5",
+			"id": "4179bbf9-a962-42ea-a971-6467533dcba7",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -85,14 +85,14 @@
 			"file_name": null,
 			"actions": [],
 			"avatar": {
-				"id": "7392f20e-fafc-4e65-aa56-1763cf982b88",
+				"id": "7402f355-c023-4eec-9828-68d14c41f411",
 				"object_type": 4,
 				"state": "idle",
 				"company": 2,
-				"score": 220,
-				"science_points": 30,
+				"score": 300,
+				"science_points": 70,
 				"position": {
-					"id": "95c559f2-0151-4ebc-86a2-13f1647600ec",
+					"id": "f68a0eaf-61cd-49b1-b4b8-3fa41bea6ebc",
 					"object_type": 6,
 					"state": "idle",
 					"x": 9,
@@ -114,7 +114,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "3126d5c3-a026-4131-ad0b-c7fb33d9214d",
+					"id": "95f97394-93d5-487e-a3ac-4b8bb11c2f31",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -122,7 +122,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "2401bde5-c5ca-4e7e-a287-5acacfc9f653",
+					"id": "9a6f5e87-e6f8-4898-a15c-8b5359a7c260",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -130,7 +130,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "5e0f9ad8-f3ea-443c-aa85-d06f32430e8d",
+					"id": "db8ae19a-3bdc-4612-b27d-b7c6facf96e9",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -138,7 +138,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "0b03d7e3-3aff-49f8-a87d-85a5e75dec25",
+					"id": "121d5e30-3bcb-4002-8c3d-bfea84ec470d",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,
