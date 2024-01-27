@@ -51,7 +51,7 @@ class Client(UserClient):
             if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
             # # Otherwise set my state to mining
-            # self.current_state = State.MINING
+            self.current_state = State.MINING
 
         # Get the current position of the bot
         current_position = avatar.position
@@ -65,7 +65,7 @@ class Client(UserClient):
             actions = move_actions  # Combine move actions with existing actions
             
         # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 10:
             self.current_state = State.SELLING
 
         # Make action decision for this turn
@@ -122,8 +122,13 @@ class Client(UserClient):
 
         # Filter out invalid moves
         valid_moves = [action for action in actions if self.is_valid_move(start_position, action, world)]
+        
+        # Check if there's any valid move, otherwise, move randomly
+        if not valid_moves:
+            valid_moves = [random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
 
         return valid_moves
+
     
     def generate_moves2(self, start_position, end_position, vertical_first):
         """
