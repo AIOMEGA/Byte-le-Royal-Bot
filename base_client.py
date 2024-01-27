@@ -34,9 +34,15 @@ class Client(UserClient):
 
     # This is where your AI will decide what to do
     def take_turn(self, turn, actions, world, avatar):
+        """
+        This is where your AI will decide what to do.
+        :param turn:        The current turn of the game.
+        :param actions:     This is the actions object that you will add effort allocations or decrees to.
+        :param world:       Generic world information
+        """
         if turn == 1:
             self.first_turn_init(world, avatar)
-
+            
         current_tile = world.game_map[avatar.position.y][avatar.position.x]
 
         # If I start the turn on my station, I should...
@@ -44,14 +50,8 @@ class Client(UserClient):
             # Buy Improved Mining tech if I can...
             if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
-            # Otherwise set my state to mining
-            self.current_state = State.MINING
-
-        # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
-            self.current_state = State.SELLING
-        else:
-            self.current_state = State.MINING
+            # # Otherwise set my state to mining
+            # self.current_state = State.MINING
 
         # Get the current position of the bot
         current_position = avatar.position
@@ -62,11 +62,15 @@ class Client(UserClient):
         # Move towards the ore if it's found
         if nearest_ore_position is not None:
             move_actions = self.generate_moves(current_position, nearest_ore_position, turn % 2 == 0, world)
-            actions = move_actions + actions  # Combine move actions with existing actions
+            actions = move_actions  # Combine move actions with existing actions
+            
+        # If I have at least 5 items in my inventory, set my state to selling
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 5:
+            self.current_state = State.SELLING
 
         # Make action decision for this turn
         if self.current_state == State.SELLING:
-            actions += self.generate_moves(avatar.position, self.base_position, turn % 2 == 0, world)
+            actions = self.generate_moves2(avatar.position, self.base_position, turn % 2 == 0)
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
                 actions = [ActionType.MINE]
@@ -117,6 +121,23 @@ class Client(UserClient):
         valid_vertical = [action for action in vertical if self.is_valid_move(start_position, action, world)]
 
         return valid_vertical + valid_horizontal if vertical_first else valid_horizontal + valid_vertical
+    
+    def generate_moves2(self, start_position, end_position, vertical_first):
+        """
+        This function will generate a path between the start and end position. It does not consider walls and will
+        try to walk directly to the end position.
+        :param start_position:      Position to start at
+        :param end_position:        Position to get to
+        :param vertical_first:      True if the path should be vertical first, False if the path should be horizontal first
+        :return:                    Path represented as a list of ActionType
+        """
+        dx = end_position.x - start_position.x
+        dy = end_position.y - start_position.y
+        
+        horizontal = [ActionType.MOVE_LEFT] * -dx if dx < 0 else [ActionType.MOVE_RIGHT] * dx
+        vertical = [ActionType.MOVE_UP] * -dy if dy < 0 else [ActionType.MOVE_DOWN] * dy
+        
+        return vertical + horizontal if vertical_first else horizontal + vertical
     
     def is_valid_move(self, position, action, world):
         """
@@ -179,4 +200,4 @@ class Client(UserClient):
 
 
 
-#check point !!!!!
+#check point
