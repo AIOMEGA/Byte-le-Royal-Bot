@@ -89,3 +89,5 @@ class Client(UserClient):
     
     def get_my_inventory(self, world):
         return world.inventory_manager.get_inventory(self.company)
+    
+    
