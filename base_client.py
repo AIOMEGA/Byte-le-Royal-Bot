@@ -20,7 +20,7 @@ class Client(UserClient):
         Allows the team to set a team name.
         :return: Your team name
         """
-        return 'The Real Jean'
+        return 'BitBots'
     
     def first_turn_init(self, world, avatar):
         """
@@ -89,3 +89,5 @@ class Client(UserClient):
     
     def get_my_inventory(self, world):
         return world.inventory_manager.get_inventory(self.company)
+    
+    
