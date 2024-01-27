@@ -77,8 +77,8 @@ class Client(UserClient):
             countATech=0
             
         #if I have enough ATech i will go back to base  
-        #if  countATech >= 1:
-              # self.current_state = State.SELLING
+        if  countATech >= 5:
+               self.current_state = State.SELLING
 
             
           
@@ -92,11 +92,11 @@ class Client(UserClient):
                 # If I'm mining and I'm standing on an ore, mine it
                 ore = current_tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item
                 actions = [ActionType.MINE]
+                ore = current_tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item
                     #check if current ore is ancient tech
                 if  ore.object_type == ObjectType.ANCIENT_TECH:
                     countATech = countATech +1
                     if  countATech >= 5:
-                        
                         self.current_state = State.SELLING
                         countATech=0
 
