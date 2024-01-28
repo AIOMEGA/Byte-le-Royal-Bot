@@ -67,9 +67,6 @@ class Client(UserClient):
                 actions = ActionType.MOVE_LEFT
             else:
                 actions = ActionType.MOVE_RIGHT
-        # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 30:
-            self.current_state = State.SELLING
 
 
         # Get the current position of the bot
@@ -78,22 +75,24 @@ class Client(UserClient):
         # Example of finding the nearest ore
         nearest_ore_position = self.find_nearest_ore(current_position, world)
 
-        if self.nearing_end is not None:
-            move_actions = self.generate_moves_to_home
-            actions = move_actions
-        # Move towards the ore if it's found
-        if nearest_ore_position is not None:
-            move_actions = self.generate_moves(current_position, nearest_ore_position, turn % 2 == 0, world)
-            actions = move_actions  # Combine move actions with existing actions
-            
         # If I have at least 5 items in my inventory, set my state to selling
         if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
             self.current_state = State.SELLING
+
+        if self.nearing_end is not None and self.current_state == State.MINING:
+            move_actions = self.generate_moves2
+            actions += move_actions
+        # Move towards the ore if it's found
+        if nearest_ore_position is not None and self.current_state == State.MINING:
+            move_actions = self.generate_moves(current_position, nearest_ore_position, turn % 2 == 0, world)
+            actions = move_actions  # Combine move actions with existing actions
+            
+        
         
 
         # Make action decision for this turn
         if self.current_state == State.SELLING:
-            actions = self.generate_moves_to_home
+            actions = self.generate_moves2
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
                 actions = [ActionType.MINE]
