@@ -50,30 +50,27 @@ class Client(UserClient):
             # buy Improved Mining tech if I can...
             if avatar.science_points >= avatar.get_tech_info('Improved Mining').cost and not avatar.is_researched('Improved Mining'):
                 return [ActionType.BUY_IMPROVED_MINING]
-            if avatar.science_points >= avatar.get_tech_info('Dynamite').cost and not avatar.is_researched('Dynamite'):
-                return [ActionType.BUY_DYNAMITE]
             if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
             if avatar.science_points >= avatar.get_tech_info('Superior Mining').cost and not avatar.is_researched('Superior Mining'):
                 return [ActionType.BUY_SUPERIOR_MINING]
-            if avatar.science_points >= avatar.get_tech_info('Landmines').cost and not avatar.is_researched('Landmines'):
-                return [ActionType.BUY_LANDMINES]
             if avatar.science_points >= avatar.get_tech_info('Superior Drivetrain').cost and not avatar.is_researched('Superior Drivetrain'):
                 return [ActionType.BUY_SUPERIOR_DRIVETRAIN]
-            if avatar.science_points >= avatar.get_tech_info('EMPs').cost and not avatar.is_researched('EMPs'):
-                return [ActionType.BUY_EMPS] 
             if avatar.science_points >= avatar.get_tech_info('Overdrive Mining').cost and not avatar.is_researched('Overdrive Mining'):
                 return [ActionType.BUY_OVERDRIVE_MINING]  
             if avatar.science_points >= avatar.get_tech_info('Overdrive Drivetrain').cost and not avatar.is_researched('Overdrive Drivetrain'):
                 return [ActionType.BUY_OVERDRIVE_DRIVETRAIN]
             # otherwise set my state to mining
             self.current_state = State.MINING
-
+        if current_tile.occupied_by.object_type == self.my_station_type:
+            if self.company == Company.CHURCH:
+                actions = ActionType.MOVE_LEFT
+            else:
+                actions = ActionType.MOVE_RIGHT
         # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 30:
             self.current_state = State.SELLING
-        else:
-            self.current_state = State.MINING
+
 
         # Get the current position of the bot
         current_position = avatar.position
@@ -81,6 +78,9 @@ class Client(UserClient):
         # Example of finding the nearest ore
         nearest_ore_position = self.find_nearest_ore(current_position, world)
 
+        if self.nearing_end is not None:
+            move_actions = self.generate_moves_to_home
+            actions = move_actions
         # Move towards the ore if it's found
         if nearest_ore_position is not None:
             move_actions = self.generate_moves(current_position, nearest_ore_position, turn % 2 == 0, world)
@@ -89,10 +89,11 @@ class Client(UserClient):
         # If I have at least 5 items in my inventory, set my state to selling
         if len([item for item in self.get_my_inventory(world) if item is not None]) >= 20:
             self.current_state = State.SELLING
+        
 
         # Make action decision for this turn
         if self.current_state == State.SELLING:
-            actions = self.generate_moves2(avatar.position, self.base_position, turn % 2 == 0)
+            actions = self.generate_moves_to_home
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
                 actions = [ActionType.MINE]
@@ -201,11 +202,554 @@ class Client(UserClient):
             return True
 
         return False
-
+    def distance_to_base(self, position, action, world):
+        if self.company == Company.CHURCH:
+            if position == [1,1]:
+                distance = 3
+            elif position == [1,2]:
+                distance = 2
+            elif position == [1,3]:
+                distance = 1
+            elif position == [1,4]:
+                distance = 0
+            elif position == [1,7]:
+                distance = 27
+            elif position == [1,8]:
+                distance = 28
+            elif position == [1,9]:
+                distance = 29
+            elif position == [1,10]:
+                distance = 30
+            elif position == [1,11]:
+                distance = 31
+            elif position == [2,1]:
+                distance = 4
+            elif position == [2,2]:
+                distance = 3
+            elif position == [2,3]:
+                distance = 2
+            elif position == [2,6]:
+                distance = 25
+            elif position == [2,7]:
+                distance = 26
+            elif position == [2,8]:
+                distance = 27
+            elif position == [2,9]:
+                distance = 28
+            elif position == [2,10]:
+                distance = 29
+            elif position == [2,11]:
+                distance = 30
+            elif position == [2,12]:
+                distance = 31
+            elif position == [3,1]:
+                distance = 5
+            elif position == [3,2]:
+                distance = 4
+            elif position == [3,5]:
+                distance = 23
+            elif position == [3,6]:
+                distance = 24
+            elif position == [3,7]:
+                distance = 25
+            elif position == [3,8]:
+                distance = 26
+            elif position == [3,10]:
+                distance = 30
+            elif position == [3,11]:
+                distance = 31
+            elif position == [3,12]:
+                distance = 32
+            elif position == [4,1]:
+                distance = 6
+            elif position == [4,2]:
+                distance = 5
+            elif position == [4,4]:
+                distance = 23
+            elif position == [4,5]:
+                distance = 22
+            elif position == [4,6]:
+                distance = 23
+            elif position == [4,7]:
+                distance = 24
+            elif position == [4,8]:
+                distance = 24
+            elif position == [4,11]:
+                distance = 32
+            elif position == [4,12]:
+                distance = 33
+            elif position == [5,1]:
+                distance = 7
+            elif position == [5,2]:
+                distance = 6
+            elif position == [5,4]:
+                distance = 22
+            elif position == [5,5]:
+                distance = 21
+            elif position == [5,6]:
+                distance = 22
+            elif position == [5,7]:
+                distance = 23
+            elif position == [5,8]:
+                distance = 24
+            elif position == [5,9]:
+                distance = 25
+            elif position == [5,11]:
+                distance = 33
+            elif position == [5,12]:
+                distance = 34
+            elif position == [6,1]:
+                distance = 8
+            elif position == [6,2]:
+                distance = 7
+            elif position == [6,4]:
+                distance = 21
+            elif position == [6,5]:
+                distance = 20
+            elif position == [6,6]:
+                distance = 21
+            elif position == [6,7]:
+                distance = 22
+            elif position == [6,8]:
+                distance = 23
+            elif position == [6,9]:
+                distance = 24
+            elif position == [6,11]:
+                distance = 34
+            elif position == [6,12]:
+                distance = 35
+            elif position == [7,1]:
+                distance = 9
+            elif position == [7,2]:
+                distance = 8
+            elif position == [7,4]:
+                distance = 20
+            elif position == [7,5]:
+                distance = 19
+            elif position == [7,6]:
+                distance = 20
+            elif position == [7,7]:
+                distance = 21
+            elif position == [7,8]:
+                distance = 22
+            elif position == [7,9]:
+                distance = 23
+            elif position == [7,11]:
+                distance = 35
+            elif position == [7,12]:
+                distance = 36
+            elif position == [8,1]:
+                distance = 10
+            elif position == [8,2]:
+                distance = 9
+            elif position == [8,4]:
+                distance = 19
+            elif position == [8,5]:
+                distance = 20
+            elif position == [8,6]:
+                distance = 19
+            elif position == [8,7]:
+                distance = 20
+            elif position == [8,8]:
+                distance = 21
+            elif position == [8,9]:
+                distance = 22
+            elif position == [8,11]:
+                distance = 36
+            elif position == [8,12]:
+                distance = 37
+            elif position == [9,1]:
+                distance = 11
+            elif position == [9,2]:
+                distance = 10
+            elif position == [9,5]:
+                distance = 17
+            elif position == [9,6]:
+                distance = 18
+            elif position == [9,7]:
+                distance = 19
+            elif position == [9,8]:
+                distance = 20
+            elif position == [9,9]:
+                distance = 21
+            elif position == [9,11]:
+                distance = 37
+            elif position == [9,12]:
+                distance = 38
+            elif position == [10,1]:
+                distance = 12
+            elif position == [10,2]:
+                distance = 11
+            elif position == [10,3]:
+                distance = 12
+            elif position == [10,5]:
+                distance = 16
+            elif position == [10,6]:
+                distance = 17
+            elif position == [10,7]:
+                distance = 18
+            elif position == [10,8]:
+                distance = 19
+            elif position == [10,11]:
+                distance = 38
+            elif position == [10,12]:
+                distance = 39
+            elif position == [11,1]:
+                distance = 13
+            elif position == [11,2]:
+                distance = 12
+            elif position == [11,3]:
+                distance = 13
+            elif position == [11,4]:
+                distance = 14
+            elif position == [11,5]:
+                distance = 15
+            elif position == [11,6]:
+                distance = 16
+            elif position == [11,7]:
+                distance = 17
+            elif position == [11,10]:
+                distance = 40
+            elif position == [11,11]:
+                distance = 39
+            elif position == [11,12]:
+                distance = 40
+            elif position == [12,2]:
+                distance = 13
+            elif position == [12,3]:
+                distance = 14
+            elif position == [12,4]:
+                distance = 15
+            elif position == [12,5]:
+                distance = 16
+            elif position == [12,6]:
+                distance = 17
+            elif position == [12,9]:
+                distance = 42
+            elif position == [12,10]:
+                distance = 41
+            elif position == [12,11]:
+                distance = 40
+            elif position == [12,12]:
+                distance = 41
+        if self.company == Company.TURING:
+            if position == [1,1]:
+                distance = 41
+            elif position == [1,2]:
+                distance = 40
+            elif position == [1,3]:
+                distance = 41
+            elif position == [1,4]:
+                distance = 42
+            elif position == [1,7]:
+                distance = 17
+            elif position == [1,8]:
+                distance = 16
+            elif position == [1,9]:
+                distance = 15
+            elif position == [1,10]:
+                distance = 14
+            elif position == [1,11]:
+                distance = 13
+            elif position == [2,1]:
+                distance = 40
+            elif position == [2,2]:
+                distance = 39
+            elif position == [2,3]:
+                distance = 40
+            elif position == [2,6]:
+                distance = 17
+            elif position == [2,7]:
+                distance = 16
+            elif position == [2,8]:
+                distance = 15
+            elif position == [2,9]:
+                distance = 14
+            elif position == [2,10]:
+                distance = 13
+            elif position == [2,11]:
+                distance = 12
+            elif position == [2,12]:
+                distance = 13
+            elif position == [3,1]:
+                distance = 39
+            elif position == [3,2]:
+                distance = 38
+            elif position == [3,5]:
+                distance = 19
+            elif position == [3,6]:
+                distance = 18
+            elif position == [3,7]:
+                distance = 17
+            elif position == [3,8]:
+                distance = 16
+            elif position == [3,10]:
+                distance = 12
+            elif position == [3,11]:
+                distance = 11
+            elif position == [3,12]:
+                distance = 12
+            elif position == [4,1]:
+                distance = 37
+            elif position == [4,2]:
+                distance = 36
+            elif position == [4,4]:
+                distance = 21
+            elif position == [4,5]:
+                distance = 20
+            elif position == [4,6]:
+                distance = 19
+            elif position == [4,7]:
+                distance = 18
+            elif position == [4,8]:
+                distance = 17
+            elif position == [4,11]:
+                distance = 10
+            elif position == [4,12]:
+                distance = 11
+            elif position == [5,1]:
+                distance = 36
+            elif position == [5,2]:
+                distance = 35
+            elif position == [5,4]:
+                distance = 22
+            elif position == [5,5]:
+                distance = 21
+            elif position == [5,6]:
+                distance = 20
+            elif position == [5,7]:
+                distance = 19
+            elif position == [5,8]:
+                distance = 18
+            elif position == [5,9]:
+                distance = 19
+            elif position == [5,11]:
+                distance = 9
+            elif position == [5,12]:
+                distance = 10
+            elif position == [6,1]:
+                distance = 35
+            elif position == [6,2]:
+                distance = 34
+            elif position == [6,4]:
+                distance = 23
+            elif position == [6,5]:
+                distance = 22
+            elif position == [6,6]:
+                distance = 21
+            elif position == [6,7]:
+                distance = 20
+            elif position == [6,8]:
+                distance = 19
+            elif position == [6,9]:
+                distance = 20
+            elif position == [6,11]:
+                distance = 8
+            elif position == [6,12]:
+                distance = 9
+            elif position == [7,1]:
+                distance = 34
+            elif position == [7,2]:
+                distance = 33
+            elif position == [7,4]:
+                distance = 24
+            elif position == [7,5]:
+                distance = 23
+            elif position == [7,6]:
+                distance = 22
+            elif position == [7,7]:
+                distance = 21
+            elif position == [7,8]:
+                distance = 20
+            elif position == [7,9]:
+                distance = 21
+            elif position == [7,11]:
+                distance = 7
+            elif position == [7,12]:
+                distance = 8
+            elif position == [8,1]:
+                distance = 33
+            elif position == [8,2]:
+                distance = 32
+            elif position == [8,4]:
+                distance = 25
+            elif position == [8,5]:
+                distance = 24
+            elif position == [8,6]:
+                distance = 23
+            elif position == [8,7]:
+                distance = 22
+            elif position == [8,8]:
+                distance = 21
+            elif position == [8,9]:
+                distance = 22
+            elif position == [8,11]:
+                distance = 6
+            elif position == [8,12]:
+                distance = 7
+            elif position == [9,1]:
+                distance = 31
+            elif position == [9,2]:
+                distance = 31
+            elif position == [9,5]:
+                distance = 26
+            elif position == [9,6]:
+                distance = 25
+            elif position == [9,7]:
+                distance = 24
+            elif position == [9,8]:
+                distance = 23
+            elif position == [9,9]:
+                distance = 24
+            elif position == [9,11]:
+                distance = 5
+            elif position == [9,12]:
+                distance = 6
+            elif position == [10,1]:
+                distance = 30
+            elif position == [10,2]:
+                distance = 29
+            elif position == [10,3]:
+                distance = 30
+            elif position == [10,5]:
+                distance = 27
+            elif position == [10,6]:
+                distance = 26
+            elif position == [10,7]:
+                distance = 25
+            elif position == [10,8]:
+                distance = 25
+            elif position == [10,11]:
+                distance = 4
+            elif position == [10,12]:
+                distance = 5
+            elif position == [11,1]:
+                distance = 28
+            elif position == [11,2]:
+                distance = 29
+            elif position == [11,3]:
+                distance = 30
+            elif position == [11,4]:
+                distance = 31
+            elif position == [11,5]:
+                distance = 28
+            elif position == [11,6]:
+                distance = 29
+            elif position == [11,7]:
+                distance = 30
+            elif position == [11,10]:
+                distance = 2
+            elif position == [11,11]:
+                distance = 3
+            elif position == [11,12]:
+                distance = 4
+            elif position == [12,2]:
+                distance = 30
+            elif position == [12,3]:
+                distance = 30
+            elif position == [12,4]:
+                distance = 29
+            elif position == [12,5]:
+                distance = 29
+            elif position == [12,6]:
+                distance = 28
+            elif position == [12,9]:
+                distance = 0
+            elif position == [12,10]:
+                distance = 1
+            elif position == [12,11]:
+                distance = 2
+            elif position == [12,12]:
+                distance = 3
+        return distance
+            
+    def generate_moves_to_home(self, position, world):
+        current_tile = [position[0]][position[1]]
+        y = current_tile[0]
+        x = current_tile[1]
+        if self.company == Company.CHURCH:
+            if x >= 10:
+                if y > 2:
+                    action = ActionType.MOVE_UP
+                else:
+                    action = ActionType.MOVE_RIGHT
+            elif x == 8 or x == 9:
+                if y > 10:
+                    action = ActionType.MOVE_RIGHT
+                else:
+                    action = ActionType.MOVE_LEFT
+            elif x >= 5 and x <=7:
+                if y < 12:
+                    action = ActionType.MOVE_DOWN
+                else:
+                    action = ActionType.MOVE_UP
+            elif x == 4:
+                if y > 10:
+                    action = ActionType.MOVE_LEFT
+                if y < 10:
+                    action = ActionType.MOVE_RIGHT
+            elif x == 3:
+                if y > 3:
+                    action = ActionType.MOVE_LEFT
+                elif y == 2:
+                    action = ActionType.MOVE_UP
+                else:
+                    action = ActionType.MOVE_RIGHT
+                
+            elif x < 3:
+                if y != 1:
+                    action = ActionType.MOVE_UP
+        elif self.company==Company.TURING:
+            if x < 3:
+                if y < 12:
+                    action = ActionType.MOVE_DOWN
+                else:
+                    action = ActionType.MOVE_UP
+            elif x == 3:
+                if y < 3:
+                    action = ActionType.MOVE_LEFT
+                elif y == 10:
+                    action = ActionType.MOVE_DOWN
+                else:
+                    action = ActionType.MOVE_RIGHT
+            elif x == 4 or x == 5:
+                action = ActionType.MOVE_RIGHT
+            elif x <= 8 and x >= 6:
+                if y < 12:
+                    action = ActionType.MOVE_UP
+                elif y == 12:
+                    action = ActionType.MOVE_DOWN
+            elif x == 9:
+                if y < 3:
+                    action = ActionType.MOVE_RIGHT
+                else:
+                    action = ActionType.MOVE_LEFT
+            elif x == 10:
+                if y < 4:
+                    action = ActionType.MOVE_RIGHT
+                elif y == 11:
+                    action = ActionType.MOVE_DOWN
+                elif y == 12:
+                    action = ActionType.MOVE_LEFT
+            elif x == 11 or x == 12:
+                if y < 12:
+                    action = ActionType.MOVE_DOWN
+                elif y == 12:
+                    action = ActionType.MOVE_LEFT
+        else:
+            return None
+        return action
+    def nearing_end(self, turn, position, action, world):
+        if (200-turn < self.distance_to_base + 3):
+            action = self.generate_moves_to_home()
+        else:
+            action = None
+        return action
 
 
     def get_my_inventory(self, world):
         return world.inventory_manager.get_inventory(self.company)
+    
 
 
 
