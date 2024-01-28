@@ -145,8 +145,13 @@ class Client(UserClient):
 
         # Filter out invalid moves
         valid_moves = [action for action in actions if self.is_valid_move(start_position, action, world)]
+        
+        # Check if there's any valid move, otherwise, move randomly
+        if not valid_moves:
+            valid_moves = [random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
 
         return valid_moves
+
     
     def generate_moves2(self, start_position, end_position, vertical_first):
         """
