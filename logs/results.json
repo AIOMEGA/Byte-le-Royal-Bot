@@ -1,7 +1,7 @@
 {
 	"players": [
 		{
-			"id": "5cdcb863-197c-4768-8577-5531e1e00c9c",
+			"id": "3578d6da-5efd-4f44-bb25-d58a249b8475",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -9,22 +9,22 @@
 			"team_name": "Unpaid Intern",
 			"file_name": null,
 			"actions": [
-				3,
+				2,
 				10
 			],
 			"avatar": {
-				"id": "4ed1a61a-e1cc-4558-9daa-c60548b91696",
+				"id": "381d4208-c4dd-464f-b99b-6cd75e8337a3",
 				"object_type": 4,
 				"state": "moving",
 				"company": 1,
 				"score": 180,
-				"science_points": 30,
+				"science_points": 20,
 				"position": {
-					"id": "35437a84-9951-4b8f-be05-30567a9a83c7",
+					"id": "43b3864b-7d05-44ff-8bfe-9c9c96161260",
 					"object_type": 6,
 					"state": "idle",
-					"x": 1,
-					"y": 6
+					"x": 2,
+					"y": 3
 				},
 				"movement_speed": 1,
 				"drop_rate": 1,
@@ -42,7 +42,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "fe24832c-242b-4b33-b1b7-492d9bb7ada9",
+					"id": "68209c07-5975-4b7e-a5f8-0eb0686082e0",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -50,7 +50,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "090a78fb-60b9-48c8-8c13-35cd308e5893",
+					"id": "261f9547-c1d9-4adb-9452-5496ec8940c9",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -58,7 +58,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "62b21a96-135f-4b42-83c3-2a30c006c1f4",
+					"id": "c57e50cc-75cc-43ca-9b7c-451575335ee1",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -66,7 +66,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "2812f72b-c838-4617-8971-062c4af0a6d1",
+					"id": "22016bc6-15ad-4fe9-b9bf-716efdbb0a7b",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,
@@ -76,7 +76,7 @@
 			}
 		},
 		{
-			"id": "eea5cdfd-85f1-4abd-8570-ea24c9db0926",
+			"id": "f4ee66f3-3ef3-4372-ae5d-4764227bb268",
 			"object_type": 3,
 			"state": "idle",
 			"functional": true,
@@ -84,31 +84,31 @@
 			"team_name": "BitBots",
 			"file_name": null,
 			"actions": [
-				3,
+				14,
 				10
 			],
 			"avatar": {
-				"id": "de233172-1b3b-443c-b2cf-f1109f7c3dfa",
+				"id": "2c19a235-a2fe-46ce-9b62-2bb6dd2720ae",
 				"object_type": 4,
-				"state": "idle",
+				"state": "mining",
 				"company": 2,
-				"score": 304,
-				"science_points": 50,
+				"score": 424,
+				"science_points": 10,
 				"position": {
-					"id": "27ed86f8-8921-4ada-9c73-4525e512110a",
+					"id": "93b76ba0-44a6-4092-bedb-f49391b50d1e",
 					"object_type": 6,
 					"state": "idle",
 					"x": 11,
-					"y": 12
+					"y": 5
 				},
 				"movement_speed": 1,
-				"drop_rate": 1,
+				"drop_rate": 2,
 				"tech_tree": {
 					"Mining Robotics": true,
 					"Improved Drivetrain": false,
 					"Superior Drivetrain": false,
 					"Overdrive Drivetrain": false,
-					"Improved Mining": false,
+					"Improved Mining": true,
 					"Superior Mining": false,
 					"Overdrive Mining": false,
 					"Dynamite": false,
@@ -117,7 +117,7 @@
 					"Trap Defusal": false
 				},
 				"dynamite_active_ability": {
-					"id": "5d07ee7f-d569-46ac-bd03-0bc895aa1b8d",
+					"id": "880b047c-3fdb-4003-bb3d-e5a81e9877b2",
 					"object_type": 28,
 					"state": "idle",
 					"cooldown": 3,
@@ -125,7 +125,7 @@
 					"is_usable": true
 				},
 				"landmine_active_ability": {
-					"id": "acf78c10-73a1-47c7-8313-ccda6934d678",
+					"id": "cde9b04a-0b0a-4bc2-bfd6-0b15a3d6b07f",
 					"object_type": 26,
 					"state": "idle",
 					"cooldown": 4,
@@ -133,7 +133,7 @@
 					"is_usable": true
 				},
 				"emp_active_ability": {
-					"id": "bd8912c6-f07d-47b1-8401-cca9b10d36f9",
+					"id": "31c66774-8f16-4061-9da9-e2e6af3c069a",
 					"object_type": 27,
 					"state": "idle",
 					"cooldown": 4,
@@ -141,7 +141,7 @@
 					"is_usable": true
 				},
 				"defusal_active_ability": {
-					"id": "83950a15-795e-4a47-9cec-150390973fc9",
+					"id": "8b3a7e0d-5f71-4b9d-9dd1-a65070bb3e77",
 					"object_type": 34,
 					"state": "idle",
 					"cooldown": 2,
