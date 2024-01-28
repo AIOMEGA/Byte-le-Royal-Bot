@@ -81,7 +81,7 @@ class Client(UserClient):
 
         if self.nearing_end is not None and self.current_state == State.MINING:
             move_actions = self.generate_moves2
-            actions += move_actions
+            actions = move_actions
         # Move towards the ore if it's found
         if nearest_ore_position is not None and self.current_state == State.MINING:
             move_actions = self.generate_moves(current_position, nearest_ore_position, turn % 2 == 0, world)
